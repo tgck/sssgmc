@@ -24,13 +24,25 @@
 		片方を電池で、一方をArduino から給電する。
 
 
+	- konashi から UART で Arduino にアスキー送出
+		- arduino の簡単な プログラムに加えて
+		- jsdo.it を作成 しかし, arduino が検知しない
+			- このとき、このコードは動く
+				http://jsdo.it/moku/KSfl
+			- 違いは
+				1. 複数のアスキーを一度に送るときのストップビットの有無　
+					k.uartWrite(0x2e);
+				2. k.uartWrite() が受け付ける引数は数値
+		- で、動くようになった
+
 ///////////////////////////////////////////////////////////
 TODO
 ///////////////////////////////////////////////////////////
 - アプリのトリガーで　LEDテープを光らせる
-	- シリアル送出　＠konashi serial
-	- UART, Sereal.read
+	xx シリアル送出　＠konashi serial
+	xx UART, Sereal.read
 	- AdaFruite NeoPixel Lib 
+	- Arduino 側のパターンの用意　-> .ino コード
 	
 - 複数の konashi を 単一のアプリから探索する
 

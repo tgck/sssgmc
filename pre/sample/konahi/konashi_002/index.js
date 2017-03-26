@@ -23,14 +23,16 @@ function setupUart(){
 
     k.uartBaudrate(k.KONASHI_UART_RATE_9K6);
     k.uartMode(k.KONASHI_UART_ENABLE);
-    k.uartWrite('c');
+    // k.uartWrite('cccaa');
+    // k.uartWrite(0x2e);
+    
 }
 
 function send(){
     console.log('functinon send');
     
     var ascii = 'a';
-    k.uartWrite(ascii);
+    k.uartWrite(ascii.charCodeAt(0)); // uartWrite の引数は数値
 }
 
 ////////////////////////////////////////////////////////////

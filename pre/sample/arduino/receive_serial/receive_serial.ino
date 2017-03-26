@@ -10,9 +10,12 @@ void setup() {
 
 void loop() { 
   if (Serial.available() > 0) {
+    
+    blink(5);
+    
     char c = Serial.read();
     if (c == ASCII) {
-      lightOnce();
+      nodd();
     }
   }
 }
@@ -24,3 +27,23 @@ void lightOnce(){
     digitalWrite(PIN_DEBUG, LOW);
     delay(1300);
 }
+
+void blink(int count){ // ...
+    for (int i=0; i<count; i++){
+      digitalWrite(PIN_DEBUG, HIGH);
+      delay(130);
+      digitalWrite(PIN_DEBUG, LOW);
+      delay(130);
+    }
+    delay(300); // space for next.
+}
+
+void nodd(){// -...
+      digitalWrite(PIN_DEBUG, HIGH);
+      delay(540);
+      digitalWrite(PIN_DEBUG, LOW);
+      delay(140);
+
+      blink(3);
+}
+

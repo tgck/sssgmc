@@ -1,0 +1,38 @@
+20170402_LED + Bluetooth
+
+///////////////////////////////////////////////////////////
+- NeoPixelライブラリで明滅パターンを切り替える
+///////////////////////////////////////////////////////////
+	1 BTアプリから、パターンを切り替える
+		- Arduino -> receive_serial_switch.ino
+		- javascript -> konashi_003
+
+	結果:
+		意図したとおりに動作する
+		(Uno + 9V バッテリー + konashi(電池なし))
+
+	TODO:
+		− LEDをオフにする方法が不明。
+			setPixelColor(int n, 0, 0, 0) ではなく、setBrightness(0) とする必要がある？
+		- Arduino のプログラム入れ替えのたびに配線をばらさなくてはいけない問題
+
+
+///////////////////////////////////////////////////////////
+- 予備調査事項
+///////////////////////////////////////////////////////////
+NeoPixel Library
+	leds.begin();
+	leds.setBrightness(int 0-255);
+	leds.setPixelColor(int n, int r, int g, int b);
+		n 番目の LED に　色を指定する
+	leds.show();
+		LEDにデータを送りだす
+
+
+	void delay(unsigned long ms)
+	パラメータで指定した時間(ミリ秒単位)だけプログラムを一時停止する。1秒は1000ミリ秒である。
+	// 
+	delay()関数を使っている間は、センサーから値を読み取ったり、計算をしたり、ピンの制御を行うことができない。その結果、ほとんどの動作を止めてしまう。タイミングを制御する別の方法を知りたいときには、millis()関数や参考のスケッチを参考にしてほしい。
+	// 
+	// via http://garretlab.web.fc2.com/arduino_reference/language/functions/time/delay.html
+

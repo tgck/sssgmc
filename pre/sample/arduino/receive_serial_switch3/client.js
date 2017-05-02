@@ -66,13 +66,16 @@ function sendAscii(str) {
         // debug --------------------------------------------------------<<
 
         // debug2 -------------------------------------------------------->>
-        k.uartWrite(0);
-        k.uartWrite(128);
-        k.uartWrite(64);
-        k.uartWrite(64);
+        //k.uartWrite(0);
+        //k.uartWrite(128);
+        //k.uartWrite(64);
+        //k.uartWrite(64);
         // debug --------------------------------------------------------<<
 
-
+        // debug3 ------------------------------------------------------->>
+        // k.uartWriteString('a');
+        k.uartWriteString('ab'); // 赤. 黄. 黄. 黄. と光る...
+        // debug --------------------------------------------------------<<
 
         console.log('function sendAscii 4chars ' + str.split(''));
         // 固定長 4Byte想定
@@ -83,7 +86,7 @@ function sendAscii(str) {
         console.log(arr); // --> [0, 208, 64, 224] など
         arr.forEach(function(v,i) {
             // console.log('forEach:' + i + ':' + v);
-            k.uartWrite(v);
+            // k.uartWrite(v);
         });
         // 改行コードを送った方がいいのかも
         //k.uartWrite(convertAscii2ColorInt(str.charCodeAt(0))); // uartWrite の引数は数値 '#' -> 数値0

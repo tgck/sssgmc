@@ -45,14 +45,21 @@ void loop() {
       }
     // } else if (Serial.available() == 4) { //'#A11' などを期待
     } else { //'#A11' などを期待
-      // このルートに入れない.. 
+      // sendString() などで 'aa' を送るとここにくる
+      
       blink(2);
-      int dummy = Serial.parseInt();
-      int col_r = Serial.parseInt();
-      int col_g = Serial.parseInt();
-      int col_b = Serial.parseInt();
-      colorWipe(strip.Color(col_r, col_g, col_b), 50);
-      delay(1000);
+      char c;
+      while (Serial.available()){
+         c = Serial.read();
+      }
+      // char c = Serial.read();// Serial.read() を投げないと、バッファの刈り取りがされない、ということらしい。
+        // Serial.read が 1文字ずつしか読まない？
+      //int dummy = Serial.parseInt();
+      //int col_r = Serial.parseInt();
+      //int col_g = Serial.parseInt();
+      //int col_b = Serial.parseInt();   
+      colorWipe(strip.Color(128, 128, 0), 50);
+      delay(333);
       colorWipe(strip.Color(0, 0, 0), 10);
     }
   }

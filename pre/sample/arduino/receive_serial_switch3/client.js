@@ -37,51 +37,14 @@ function send(){
     k.uartWrite(ascii.charCodeAt(0)); // uartWrite の引数は数値
 }
 
-// 1文字ずつ受け付ける
-// 'A' とか '9' とか 'F'  を渡す
-function convertAscii2ColorInt(char){
-//    if (char.length !== 1){ console.log("invalid arg"); return}
-    var result, hex;
-
-    var num = char.charCodeAt(0);
-    // var num = char; // とりあえず
-
-    if (num >= 48 && num <= 57) {
-        hex = (num - 48);
-    } // 0 -> 9
-    else if (num >= 65 && num <= 70 ) { // 大文字
-        hex = (num - 55);
-    } else {
-        return 0;
-    }
-    result = hex * 16;
-    console.log('char[' + char +']:' + result);
-    return result;
-}
-
 function sendAscii(str) {
-    if (str.length == 4) {
-        // debug1 -------------------------------------------------------->>
-        // k.uartWrite('b'.charCodeAt(0));// 単発で投げるのはうまくいく
-        // debug --------------------------------------------------------<<
-
-        // debug2 -------------------------------------------------------->>
-        //k.uartWrite(0);
-        //k.uartWrite(128);
-        //k.uartWrite(64);
-        //k.uartWrite(64);
-        // debug --------------------------------------------------------<<
-
-        // debug3 ------------------------------------------------------->>
-        // k.uartWriteString('a');
-        // k.uartWriteString('abcd'); // 赤. 黄. 黄. 黄. と光る...
-            // 'abca' -> 後ろのループに入れる
-            // 'abc' -> 後ろのループに入れる
-            // 'ab' -> 後ろのループに入れず、赤. 緑と光る.
-        // debug --------------------------------------------------------<<
-        k.uartWriteString('0,255,255'); // 受けにて3回parseInt()を呼べばOK
-        // debug --------------------------------------------------------<<
-
+    if (str.length > 1) {
+        //k.uartWriteString('#0,128,190'); // 受けにて3回parseInt()を呼べばOK
+        var astr = '#0,128,198';
+        console.log(str);
+        console.log(astr);
+        //k.uartWriteString(astr); // 受けにて3回parseInt()を呼べばOK
+        k.uartWriteString(str);
     } else if (str.length == 1) {
         console.log('function sendAscii 1char');
         k.uartWrite(str.charCodeAt(0)); // char を数値に変換して渡す
@@ -115,7 +78,7 @@ $(function(){
     $(".tap-to-send-char").on('click', function(ev){
         var ascii = $(ev.target).data('key');
         var $info = $(".info");
-        $info.empty().text('sendAscii ' + ascii);
+        $info.empty().text('sendAscii[' + ascii + ']');
 
         sendAscii(ascii);
     });

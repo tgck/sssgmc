@@ -27,7 +27,7 @@ void setup() {
 void loop() { 
   
   if (Serial.available() > 0) {
-    delay(333); // 信号全体が届くのを待つ
+    delay(33); // 信号全体が届くのを待つ
 
     if (Serial.find("#")) { // "#255,255,0"
       int col_r, col_g, col_b;
@@ -37,11 +37,12 @@ void loop() {
         col_g = Serial.parseInt();
         col_b = Serial.parseInt();   
       }
-      colorWipe(strip.Color(col_r, col_g, col_b), 50);
+      colorWipe(strip.Color(col_r, col_g, col_b), 25);
       blink(2);
       delay(1333);
-      colorWipe(strip.Color(0, 0, 0), 10);      
+      colorWipe(strip.Color(0, 0, 0), 10);
     } else if (Serial.available() == 1) {
+      blink(4);
       char c = Serial.read();
       
       if (c == ASC_A) {

@@ -25,11 +25,23 @@ void setup() {
 }
 
 void loop() { 
-  // if (Serial.available() == 2) {
+  
   if (Serial.available() > 0) {
-    delay(133);
+    delay(333); // 信号全体が届くのを待つ
 
-    if (Serial.available() == 1) { // これは 'a' とか 'b' とか来てるときにうまく動く      
+    if (Serial.find("#")) { // "#255,255,0"
+      int col_r, col_g, col_b;
+      col_r = col_g = col_b = 0;
+      while (Serial.available()){
+        col_r = Serial.parseInt();
+        col_g = Serial.parseInt();
+        col_b = Serial.parseInt();   
+      }
+      colorWipe(strip.Color(col_r, col_g, col_b), 50);
+      blink(2);
+      delay(1333);
+      colorWipe(strip.Color(0, 0, 0), 10);      
+    } else if (Serial.available() == 1) {
       char c = Serial.read();
       
       if (c == ASC_A) {
@@ -41,23 +53,8 @@ void loop() {
       } else if (c == ASC_Z) {
         colorWipe(strip.Color(1, 1, 1), 50);
       }
-    } else if (Serial.available() == 4) { //'#A11' などを期待
-    // } else { //'#A11' などを期待
-      blink(2);
-      char c;
-      while (Serial.available()){
-         c = Serial.read();
-      }
-      // char c = Serial.read();// Serial.read() を投げないと、バッファの刈り取りがされない、ということらしい。
-        // Serial.read が 1文字ずつしか読まない？
-      //int dummy = Serial.parseInt();
-      //int col_r = Serial.parseInt();
-      //int col_g = Serial.parseInt();
-      //int col_b = Serial.parseInt();   
-      colorWipe(strip.Color(128, 128, 0), 50);
-      delay(333);
-      colorWipe(strip.Color(0, 0, 0), 10);
-    }
+    } 
+
   }
 }
 

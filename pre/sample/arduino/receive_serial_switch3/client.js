@@ -74,28 +74,14 @@ function sendAscii(str) {
 
         // debug3 ------------------------------------------------------->>
         // k.uartWriteString('a');
-        k.uartWriteString('bc'); // 赤. 黄. 黄. 黄. と光る...
+        // k.uartWriteString('abcd'); // 赤. 黄. 黄. 黄. と光る...
             // 'abca' -> 後ろのループに入れる
             // 'abc' -> 後ろのループに入れる
             // 'ab' -> 後ろのループに入れず、赤. 緑と光る.
         // debug --------------------------------------------------------<<
+        k.uartWriteString('0,255,255'); // 受けにて3回parseInt()を呼べばOK
+        // debug --------------------------------------------------------<<
 
-        console.log('function sendAscii 4chars ' + str.split(''));
-        // 固定長 4Byte想定
-        var arr = str.split('').map(function(v,i){
-            // console.log(i + ':' + v);
-            return convertAscii2ColorInt(v); // char 文字 を渡す
-        });
-        console.log(arr); // --> [0, 208, 64, 224] など
-        arr.forEach(function(v,i) {
-            // console.log('forEach:' + i + ':' + v);
-            // k.uartWrite(v);
-        });
-        // 改行コードを送った方がいいのかも
-        //k.uartWrite(convertAscii2ColorInt(str.charCodeAt(0))); // uartWrite の引数は数値 '#' -> 数値0
-        //k.uartWrite(convertAscii2ColorInt(str.charCodeAt(1))); // uartWrite の引数は数値 R
-        //k.uartWrite(convertAscii2ColorInt(str.charCodeAt(2))); // uartWrite の引数は数値 G
-        //k.uartWrite(convertAscii2ColorInt(str.charCodeAt(3))); // uartWrite の引数は数値 B
     } else if (str.length == 1) {
         console.log('function sendAscii 1char');
         k.uartWrite(str.charCodeAt(0)); // char を数値に変換して渡す

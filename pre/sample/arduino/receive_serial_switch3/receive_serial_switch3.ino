@@ -27,10 +27,8 @@ void setup() {
 void loop() { 
   // if (Serial.available() == 2) {
   if (Serial.available() > 0) {
+    delay(133);
 
-    // if (Serial.available() == 2) { 
-      // これはうまくいかない. 2回目のタップで一個目のタップに
-      // 該当する値が来る
     if (Serial.available() == 1) { // これは 'a' とか 'b' とか来てるときにうまく動く      
       char c = Serial.read();
       
@@ -43,10 +41,8 @@ void loop() {
       } else if (c == ASC_Z) {
         colorWipe(strip.Color(1, 1, 1), 50);
       }
-    // } else if (Serial.available() == 4) { //'#A11' などを期待
-    } else { //'#A11' などを期待
-      // sendString() などで 'aa' を送るとここにくる
-      
+    } else if (Serial.available() == 4) { //'#A11' などを期待
+    // } else { //'#A11' などを期待
       blink(2);
       char c;
       while (Serial.available()){

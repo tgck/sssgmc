@@ -74,7 +74,10 @@ function sendAscii(str) {
 
         // debug3 ------------------------------------------------------->>
         // k.uartWriteString('a');
-        k.uartWriteString('ab'); // 赤. 黄. 黄. 黄. と光る...
+        k.uartWriteString('bc'); // 赤. 黄. 黄. 黄. と光る...
+            // 'abca' -> 後ろのループに入れる
+            // 'abc' -> 後ろのループに入れる
+            // 'ab' -> 後ろのループに入れず、赤. 緑と光る.
         // debug --------------------------------------------------------<<
 
         console.log('function sendAscii 4chars ' + str.split(''));
